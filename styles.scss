@@ -1,0 +1,269 @@
+@charset "utf-8";
+*, *::before, *::after { 
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  line-height: 1;
+  vertical-align: baseline;
+  list-style-type: none;
+  user-select: none;
+}
+
+
+// -----------------------------------------------
+// QR Code Generator ---
+
+body {
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #fff;
+  padding: 20px 0; //*
+  background-image: url(img/stickers.jpg);
+  background-position: center;
+  background-size: cover;
+  @media (max-width: 414px) {
+    background-image: url(img/stickers1.jpg);
+    min-height: 100dvh;
+    overflow: hidden;
+  }
+}
+
+.container {
+  width: 90%; //*
+  max-width: 400px; //*
+  padding: 25px 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 2px solid #333;
+  .wrapper {
+    margin-bottom: 20px;
+    h1 {
+      color: #333;
+      font-size: 1.6em;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    ul {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-left: 10px;
+      li {
+        width: 15px;
+        height: 15px;
+        background-color: #333;
+        border-radius: 50%;
+        margin: 10px;
+        cursor: pointer;
+        &:nth-of-type(1) {
+          background-color: #333;
+          margin-left: 15px;
+          &.selected {
+            width: 10px;
+            height: 10px;
+            box-shadow: 0 0 0 3px #fff, 0 0 0 6px #333;
+          }
+        }
+        &:nth-of-type(2) {
+          background-color: #0af;
+          &.selected {
+            box-shadow: 0 0 0 3px #fff, 0 0 0 6px #0af;
+          }
+        }
+        &:nth-of-type(3) {
+          background-color: #ffdd00;
+          &.selected {
+            box-shadow: 0 0 0 3px #fff, 0 0 0 6px #ffdd00;
+          }
+        }
+        &:nth-of-type(4) {
+          background-color: #ee6007;
+          &.selected {
+            box-shadow: 0 0 0 3px #fff, 0 0 0 6px #ee6007;
+          }
+        }
+        &:nth-of-type(5) {
+          background-color: #0ff;
+          &.selected {
+            box-shadow: 0 0 0 3px #fff, 0 0 0 6px #0ff;
+          }
+        }
+      }
+    }
+  }
+  form {
+    input {
+      width: 100%;
+      border: 2px solid #000;
+      border-radius: 3px;
+      padding: 10px;
+      outline: none;
+      &:focus {
+        border: 2px solid #7066ff;
+      }
+      &.error {
+        animation: animate .05s linear 10;
+      }
+      &::placeholder {
+        letter-spacing: 1px;
+      }
+    }
+    .image-wrapper {
+      width: 100%;
+      img {
+        display: block;
+        margin: 40px auto 30px;
+      }
+      .download-anchor {
+        color: #08f;
+        width: max-content;
+        display: block;
+        margin: 0 auto;
+        &:active {
+          color: #652700;
+          color: #05f;
+        }
+      }
+    }
+    button {
+      display: block;
+      color: #fff;
+      letter-spacing: .5px;
+      background-color: #5f53ff;
+      font-size: 1.2em;
+      font-weight: bold;
+      width: 100%;
+      padding: 15px 20px;
+      border-radius: 10px;
+      margin: 30px auto 10px;
+      transition: .3s;
+      cursor: pointer;
+      &:active {
+        background-color: #5100ff;
+      }
+    }
+  }
+}
+
+@keyframes animate {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+
+// -----------------------------------------------
+// QR Code.js Download 1.---
+
+// #qrcode {
+//   background-color: #ff0;
+//   border-radius: 5px;
+//   overflow: hidden;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   padding: 8px;
+// }
+
+
+// -----------------------------------------------
+// QR Code.js Download 2.---
+
+// #qrcode {
+//   border-radius: 10px;
+//   overflow: hidden;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+
+// -----------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
