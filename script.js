@@ -6,9 +6,6 @@ import {console_color,console_red,console_green,console_yellow,
 // ---------------------------------------------------------------------------------------
 //                            ----- QR CODE GENERATOR -----
 // ---------------------------------------------------------------------------------------
-// cyber-ground.github.io/qrcode
-//'color=a3ffff&bgcolor=0ff';
-
 
 
 const imageWrapper = document.querySelector('.image-wrapper');
@@ -88,10 +85,6 @@ function resetColor() {
   });
 }
 
-//* colored qrcode ---
-  //" const params = 'color=ff0&bgcolor=f00&margin=5';
-  //" const src = `${api}?size=150x150&${params}&data=https://${inputURL.value}`;
-//* ------------------------------------------------------------------------------
 
 // ---------------------------------------------------------------------------------------
 //                           ----- QR CODE JS DOWNLOAD 1.-----
