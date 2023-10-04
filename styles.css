@@ -9,6 +9,7 @@
   vertical-align: baseline;
   list-style-type: none;
   user-select: none;
+  -webkit-user-select: none;
 }
 
 body {
