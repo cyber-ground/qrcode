@@ -126,6 +126,7 @@ body {
 .container form .image-wrapper img {
   display: block;
   margin: 40px auto 30px;
+  border-radius: 10px;
 }
 .container form .image-wrapper .download-anchor {
   color: #08f;

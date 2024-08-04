@@ -12,17 +12,10 @@ import {console_color,console_red,console_green,console_yellow,
   const inputURL = document.querySelector('input');
   const form = document.querySelector('form');
   const title = document.querySelector('.title');
+  const themeLists = document.querySelectorAll('li');
+  let color = themeLists[0].dataset.theme; 
   let protocol = 'https://';
 
-  title.addEventListener('click', () => {
-    title.classList.toggle('active');
-      if(title.classList.contains('active')) {
-        protocol = '';
-      } else { protocol = 'https://'}
-    });
-
-  let color;
-  const themeLists = document.querySelectorAll('li');
   themeLists.forEach(list => {
     list.addEventListener('click', () => {
       resetColor();
@@ -32,6 +25,13 @@ import {console_color,console_red,console_green,console_yellow,
     });
   });
 
+  title.addEventListener('click', () => {
+    title.classList.toggle('active');
+    if(title.classList.contains('active')) {
+      protocol = '';
+    } else { protocol = 'https://'}
+    inputURL.focus();
+  });
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -43,12 +43,12 @@ import {console_color,console_red,console_green,console_yellow,
     const qrImage = document.createElement('img');
     qrImage.classList.add('qr');
     const api = 'https://api.qrserver.com/v1/create-qr-code/';
-    const previewParams = `?${color}&size=150x150&margin=5&data=`;
+    const previewParams = `?${color}&size=150x150&margin=10&data=`;
     const downloadParams = `?${color}&size=600x600&margin=24&data=`;
     const previewSrc = `${api}${previewParams}${protocol}${inputURL.value}`;
     const downloadSrc = `${api}${downloadParams}${protocol}${inputURL.value}`;
-    console.log(previewSrc);
-    console.log(downloadSrc);
+    console.log(previewSrc); //* log
+    console.log(downloadSrc); //* log
     qrImage.src = previewSrc;
     imageWrapper.appendChild(qrImage);
     inputURL.blur();
@@ -98,6 +98,7 @@ import {console_color,console_red,console_green,console_yellow,
     });
   }
 
+
 // ---------------------------------------------------------------------------------------
 //                           ----- QR CODE JS DOWNLOAD 1.-----
 // ---------------------------------------------------------------------------------------
@@ -122,9 +123,9 @@ import {console_color,console_red,console_green,console_yellow,
 //   link.click();
 // } 
 
-// // setTimeout(() => {
-// //   downloadQR()
-// // }, 1000);
+// setTimeout(() => {
+//   downloadQR()
+// }, 1000);
 
 
 // ---------------------------------------------------------------------------------------
