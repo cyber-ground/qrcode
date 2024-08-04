@@ -9,7 +9,6 @@
   vertical-align: baseline;
   list-style-type: none;
   user-select: none;
-  -webkit-user-select: none;
 }
 
 body {
@@ -43,11 +42,18 @@ body {
 .container .wrapper {
   margin-bottom: 20px;
 }
-.container .wrapper h1 {
+.container .wrapper h1.title {
   color: #333;
   font-size: 1.6em;
   font-weight: bold;
   margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.container .wrapper h1.title.active {
+  color: #5100ff;
 }
 .container .wrapper ul {
   display: flex;

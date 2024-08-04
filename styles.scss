@@ -10,7 +10,6 @@
   vertical-align: baseline;
   list-style-type: none;
   user-select: none;
-  -webkit-user-select: none;
 }
 
 
@@ -30,8 +29,8 @@ body {
   background-size: cover;
   @media (max-width: 414px) {
     background-image: url(img/stickers1.jpg);
-    min-height: 100dvh;
-    overflow: hidden;
+    min-height: 100dvh; //*
+    overflow: hidden; //*
   }
 }
 
@@ -44,11 +43,18 @@ body {
   border: 2px solid #333;
   .wrapper {
     margin-bottom: 20px;
-    h1 {
+    h1.title {
       color: #333;
       font-size: 1.6em;
       font-weight: bold;
       margin-bottom: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      &.active { 
+        color: #5100ff;
+      }
     }
     ul {
       display: flex;
