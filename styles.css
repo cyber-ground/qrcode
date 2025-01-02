@@ -11,12 +11,16 @@
   user-select: none;
 }
 
+html {
+  overscroll-behavior-y: none;
+}
+
 body {
   font-family: "Poppins", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 100dvh;
   background-color: #fff;
   padding: 20px 0;
   background-image: url(img/stickers.jpg);
