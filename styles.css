@@ -342,7 +342,7 @@ body.success {
   word-break: break-word;
 }
 .scannerContainer #result p.word-wrapper .word.zenkakuText {
-  font-size: 0.8em;
+  font-size: 1em;
 }
 .scannerContainer #result p.wrapper {
   padding: 5px;
