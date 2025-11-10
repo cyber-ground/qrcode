@@ -23,12 +23,14 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   min-height: 100dvh;
   background-color: #e1e1e1;
   padding: 20px 0;
   background-image: url(img/stickers.jpg);
   background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
 }
 body.success {
   background-image: initial;
@@ -214,17 +216,11 @@ body.success {
   }
 }
 .scannerContainer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  min-height: 100vh;
   font-family: "AKONY";
   font-weight: bold;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  overflow: hidden;
   display: none;
 }
 .scannerContainer.active {
