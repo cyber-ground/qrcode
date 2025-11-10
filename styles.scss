@@ -32,14 +32,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  // flex-direction: column;
   min-height: 100dvh;
   background-color: #e1e1e1; //bc#fff
   padding: 20px 0; //*
   background-image: url(img/stickers.jpg);
   background-position: center;
   background-size: cover;
-  // background-repeat: no-repeat;
   &.success {
     background-image: initial;
   }
@@ -64,8 +62,7 @@ body {
 .container {
   width: 90%; //*
   max-width: 400px; //*
-  // padding: 25px 30px;//* original
-  padding: 25px 30px 15px; ///////////////////////////////
+  padding: 25px 30px 15px; 
   background-color: #fff;
   border-radius: 10px;
   border: 2px solid #333;
@@ -183,7 +180,7 @@ body {
       width: 100%;
       padding: 15px 20px;
       border-radius: 10px;
-      margin: 20px auto 10px; //* og
+      margin: 20px auto 10px;
       transition: .3s;
       cursor: pointer;
       &:active {
@@ -241,18 +238,12 @@ body {
 //^ -----------------------------------
 
 .scannerContainer {
-  // position: absolute;
-  // top: 0;
-  // left: 0;
-  // width: 100%;
-  // min-height: 100dvh;
   font-family: 'AKONY';
   font-weight: bold;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  // overflow: hidden;
-  display: none; 
+  display: none; //*
   &.active {
     display: flex;
   }
@@ -363,7 +354,6 @@ body {
       margin-bottom: 10px;
     }
     p.word-wrapper {
-      font-family: 'Orbitron-Bold';
       font-family: 'Iceberg';
       padding: 5px;
       width: 100%;
@@ -383,7 +373,7 @@ body {
     p.wrapper {
       padding: 5px;
       a.anchor {
-        font-family: 'Orbitron-Bold';
+        font-family: 'Iceberg';
         color: #000;
         word-wrap: break-word;
         word-break: break-word;
@@ -406,8 +396,7 @@ body {
 
 .camera {
   position: absolute;
-  top: 22%; //*og
-  top: 17.4%; /////////
+  top: 17.4%;
   width: 50px;
   height: 50px;
   background-color: #dfdfdf;
