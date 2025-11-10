@@ -169,7 +169,7 @@ body.success {
 .container form button:active {
   background-color: #5100ff;
 }
-.container .icon {
+.container .btn-lineBreak {
   position: relative;
   display: flex;
   justify-content: center;
@@ -185,14 +185,14 @@ body.success {
   margin: 12px auto 0;
   opacity: 0.3;
 }
-.container .icon.active {
+.container .btn-lineBreak.active {
   opacity: 1;
 }
-.container .icon.inactive {
+.container .btn-lineBreak.inactive {
   opacity: 0.3;
   pointer-events: none;
 }
-.container .icon.error {
+.container .btn-lineBreak.error {
   animation: vibrate 0.05s linear 10;
 }
 

@@ -28,7 +28,7 @@ const container = document.querySelector('.container');
 
   title.addEventListener('click', () => {
     title.classList.toggle('active');
-    icon.classList.toggle('active');
+    btnLineBreak.classList.toggle('active');
     if(title.classList.contains('active')) {
       protocol = '';
     } else { protocol = 'https://'}
@@ -36,12 +36,12 @@ const container = document.querySelector('.container');
   });
 
   let lastChar;
-  const icon = container.querySelector('.icon');
-  icon.addEventListener('click', () => {
-    if(inputURL.value === '') { error(icon); return}
-    if(!title.classList.contains('active')) { error(icon); return}
+  const btnLineBreak = container.querySelector('.btn-lineBreak');
+  btnLineBreak.addEventListener('click', () => {
+    if(inputURL.value === '') { error(btnLineBreak); return}
+    if(!title.classList.contains('active')) { error(btnLineBreak); return}
     lastChar = inputURL.value.slice(-1);
-    if(lastChar === '*') { inputURL.focus(); error(icon); return}
+    if(lastChar === '*') { inputURL.focus(); error(btnLineBreak); return}
     inputURL.value = inputURL.value + '*';
     lastChar = inputURL.value.slice(-1);
     inputURL.focus();
@@ -85,7 +85,7 @@ const container = document.querySelector('.container');
     qrImage.src = previewSrc;
     imageWrapper.appendChild(qrImage);
     inputURL.blur();
-    icon.classList.add('inactive');
+    btnLineBreak.classList.add('inactive');
     const downloadAnchor = document.createElement('a');
     downloadAnchor.setAttribute('href', '');
     downloadAnchor.classList.add('download-anchor');
@@ -110,7 +110,7 @@ const container = document.querySelector('.container');
     if(prevImg) { prevImg.remove() }
     const downloadAnchor = document.querySelector('.download-anchor');
     if(downloadAnchor) { downloadAnchor.remove() }
-    icon.classList.remove('inactive');
+    btnLineBreak.classList.remove('inactive');
   });
 
   inputURL.addEventListener('click', () => {
