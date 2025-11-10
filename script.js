@@ -196,7 +196,7 @@ function createScanner() {
     if(response[0] === ' ') { error(); return }
 		const result = document.getElementById('result');
 		if(isZenkaku(response) || response.includes(' ') 
-			|| !response.includes('.') || !response.includes('https://')
+			|| !response.includes('.') || !response.includes('https://') || !response.includes('http://')
     || response.match(/[!@#$%&?*^(){}\[\]<>;,"'~`|\\+=]/g)) {
 			result.innerHTML = `<h2>Success</h2>
 			<p class="word-wrapper"></p>`;
