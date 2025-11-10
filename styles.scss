@@ -1,0 +1,541 @@
+@charset "utf-8";
+
+@font-face {
+  font-family: 'Orbitron-Regular';
+  src: url('./font/Orbitron-Regular.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Orbitron-Bold';
+  src: url('./font/Orbitron-Regular.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Iceberg';
+  src: url('./font/Iceberg.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AKONY';
+  src: url('./font/AKONY.ttf') format('truetype');
+  font-display: swap;
+}
+
+// -----------------------------------------------
+//* QR Code Generator ---
+
+body {
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // flex-direction: column;
+  min-height: 100dvh;
+  background-color: #e1e1e1; //bc#fff
+  padding: 20px 0; //*
+  background-image: url(img/stickers.jpg);
+  background-position: center;
+  background-size: cover;
+  &.success {
+    background-image: initial;
+  }
+  // &.success::before {
+  //   content: '';
+  //   z-index: 1;
+  //   position: absolute;
+  //   inset: 0;
+  //   background-image: url(img/stickers.jpg);
+  //   background-position: center;
+  //   background-size: cover;
+  //   pointer-events: none;
+  //   opacity: .06;
+  // }
+  @media (max-width: 414px) {
+    background-image: url(img/stickers1.jpg);
+    min-height: 100dvh; //*
+    overflow: hidden; //*
+  }
+}
+
+.container {
+  width: 90%; //*
+  max-width: 400px; //*
+  // padding: 25px 30px;//* original
+  padding: 25px 30px 15px; ///////////////////////////////
+  background-color: #fff;
+  border-radius: 10px;
+  border: 2px solid #333;
+  &.inactive { 
+    display: none;
+  }
+  .wrapper {
+    margin-bottom: 20px;
+    h1.title {
+      color: #333;
+      font-size: 1.6em;
+      font-weight: bold;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      &.active { 
+        color: #5100ff;
+      }
+    }
+    ul {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-left: 10px;
+      li {
+        width: 15px;
+        height: 15px;
+        background-color: #333;
+        border-radius: 50%;
+        margin: 10px;
+        cursor: pointer;
+        &:nth-of-type(1) {
+          background-color: #333;
+          margin-left: 15px;
+          &.selected {
+            width: 10px;
+            height: 10px;
+            box-shadow: 0 0 0 3px #fff, 0 0 0 6px #333;
+          }
+        }
+        &:nth-of-type(2) {
+          background-color: #07f;
+          &.selected {
+            box-shadow: 0 0 0 3px #fff, 0 0 0 6px #07f;
+          }
+        }
+        &:nth-of-type(3) {
+          background-color: #2bad00;
+          &.selected {
+            box-shadow: 0 0 0 3px #fff, 0 0 0 6px #2bad00;
+          }
+        }
+        &:nth-of-type(4) {
+          background-color: #f30;
+          &.selected {
+            box-shadow: 0 0 0 3px #fff, 0 0 0 6px #f30;
+          }
+        }
+        &:nth-of-type(5) {
+          background-color: #b0f;
+          &.selected {
+            box-shadow: 0 0 0 3px #fff, 0 0 0 6px #b0f;
+          }
+        }
+      }
+    }
+  }
+  form {
+    input {
+      width: 100%;
+      border: 2px solid #000;
+      border-radius: 3px;
+      padding: 10px;
+      outline: none;
+      word-wrap: break-word;
+      word-break: break-word;
+      &:focus {
+        border: 2px solid #7066ff;
+      }
+      &.error {
+        animation: vibrate .05s linear 10;
+      }
+      &::placeholder {
+        letter-spacing: 1px;
+      }
+    }
+    .image-wrapper {
+      width: 100%;
+      img.qr {
+        display: block;
+        margin: 40px auto 30px;
+        border-radius: 10px;
+      }
+      .download-anchor {
+        color: #08f;
+        width: max-content;
+        display: block;
+        margin: 0 auto;
+        &:active {
+          color: #05f;
+        }
+      }
+    }
+    button {
+      display: block;
+      color: #fff;
+      letter-spacing: .5px;
+      background-color: #5f53ff;
+      font-size: 1.2em;
+      font-weight: bold;
+      width: 100%;
+      padding: 15px 20px;
+      border-radius: 10px;
+      margin: 20px auto 10px; //* og
+      transition: .3s;
+      cursor: pointer;
+      &:active {
+        background-color: #5100ff;
+      }
+    }
+  }
+  .icon {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'iceberg';
+    width: 100px;
+    height: 10px;
+    color: #fff;
+    background-color: #0af;
+    text-transform: uppercase;
+    border-radius: 5px;
+    padding: 12px 0 10px;
+    margin: 12px auto 0;
+    opacity: .3;
+    &.active {
+      opacity: 1;
+    }
+    &.inactive {
+      opacity: .3;
+      pointer-events: none;
+    }
+    &.error {
+      animation: vibrate .05s linear 10;
+    }
+  }
+}
+
+
+@keyframes vibrate {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+//^ -----------------------------------
+
+.scannerContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  font-family: 'AKONY';
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+  display: none; 
+  &.active {
+    display: flex;
+  }
+  #reader {
+    width: 360px;
+    height: 540px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #742fe4;
+    background-color: #e1e1e1fa;
+    overflow: hidden; //*
+    &.inactive {
+      display: none;
+    }
+    .info-icon {
+      display: none;
+    }
+    #reader__header_message {
+      font-size: .8em !important;
+    }
+    #reader__scan_region {
+      width: 360px;
+      max-height: 360px;
+      video {
+        width: 360px;
+        max-height: 360px;
+      }
+    }
+    #reader__dashboard_section {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      #html5-qrcode-select-camera {
+        font-family: 'Orbitron-Bold';
+        margin-top: 10px;
+      }
+      #reader__dashboard_section_csr {
+        span:nth-of-type(1) {
+          color: #00a700;
+          font-size: .9em;
+        }
+        #html5-qrcode-button-camera-permission {
+          width: 96%;
+          color: #000;
+          background-color: #fff;
+          border-radius: 10px;
+          padding: 5px 10px 2px;
+          margin-bottom: 5px;
+        }
+      }
+      span:nth-of-type(2) {
+        display: inline-block;
+        margin-bottom: 10px;
+      }
+      #html5-qrcode-button-camera-start {
+        color: #000;
+        background-color: #0af;
+        border-radius: 10px;
+        padding: 5px 10px 2px;
+        margin-top: 15px;
+      }
+      #html5-qrcode-button-camera-stop {
+        color: #fff;
+        background-color: #f00;
+        border-radius: 10px;
+        padding: 5px 10px 2px;
+        margin-top: 10px;
+      }
+      #html5-qrcode-anchor-scan-type-change {
+        text-decoration: none !important;
+        display: inline-block;
+        width: 95%;
+        font-size: .9em;
+        color: #ebebeb;
+        background-color: #793bdc;
+        border-radius: 10px;
+        padding: 5px 10px 2px;
+        margin-top: 5px !important;
+        &.active {
+          font-size: .95em;
+        }
+      }
+      .borderElement {
+        #html5-qrcode-button-file-selection {
+          color: #ff3700;
+          background-color: #f3f3f3;
+          border-radius: 5px;
+          padding: 5px 0;
+          &.error {
+            font-size: .5em;
+          }
+        }
+        .dropImageScan_text {
+          color: #000;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+  #result {
+    text-align: center;
+    font-size: 1.5em;
+    h2 {
+      color: #05b605;
+      font-size: .7em;
+      margin-bottom: 10px;
+    }
+    p.word-wrapper {
+      font-family: 'Orbitron-Bold';
+      font-family: 'Iceberg';
+      padding: 5px;
+      width: 100%;
+      .word {
+        width: 100%;
+        font-size: 1em;
+        line-height: 1.4;
+        padding: 0 20px;
+        text-align: center;
+        word-wrap: break-word;
+        word-break: break-word;
+        &.zenkakuText {
+          font-size: .8em;
+        }
+      }
+    }
+    p.wrapper {
+      padding: 5px;
+      a.anchor {
+        font-family: 'Orbitron-Bold';
+        color: #000;
+        word-wrap: break-word;
+        word-break: break-word;
+      }
+    }
+  }
+  .btnTop {
+    color: #742fe4;
+    font-size: .8em;
+    margin-top: -20px;
+    z-index: 1000;
+    &.success {
+      margin-top: 30px;
+    }
+    &.inactive {
+      visibility: hidden;
+    }
+  }
+}
+
+.camera {
+  position: absolute;
+  top: 22%; //*og
+  top: 21.5%; /////////
+  width: 50px;
+  height: 50px;
+  background-color: #dfdfdf;
+  border: 2px solid #000;
+  border-radius: 6px;
+  z-index: 100;
+  &.inactive {
+    visibility: hidden;
+  }
+  img {
+    position: absolute;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// -----------------------------------------------
+// QR Code.js Download 1.---
+
+// #qrcode {
+//   background-color: #dfdfdf;
+//   border-radius: 5px;
+//   overflow: hidden;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   padding: 20px;
+//   width: 620px;
+//   height: 620px;
+//   margin: auto;
+// }
+
+
+// -----------------------------------------------
+// QR Code.js Download 2.---
+
+// body {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   min-height: ;
+// }
+
+// #qrcode {
+//   border-radius: 10px;
+//   overflow: hidden;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+
+// -----------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
