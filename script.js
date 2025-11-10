@@ -82,8 +82,6 @@ const container = document.querySelector('.container');
     const downloadParams = `?${color}&size=600x600&margin=24&data=`;
     const previewSrc = `${api}${previewParams}${protocol}${inputURL.value}`;
     const downloadSrc = `${api}${downloadParams}${protocol}${inputURL.value}`;
-    // console.log(previewSrc); //* log
-    // console.log(downloadSrc); //* log
     qrImage.src = previewSrc;
     imageWrapper.appendChild(qrImage);
     inputURL.blur();
