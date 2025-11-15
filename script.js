@@ -8,71 +8,109 @@ import {console_color,console_red,console_green,console_yellow,
 // ---------------------------------------------------------------------------------------
 
 
-const container = document.querySelector('.container');
+  let landscape = window.matchMedia("(orientation: landscape)").matches;
+  const mobile = navigator.userAgent.match(/iPhone|Android.+Mobile/);
+  const container = document.querySelector('.container');
   const imageWrapper = document.querySelector('.image-wrapper');
   const inputURL = document.querySelector('input');
   const form = document.querySelector('form');
-  const title = document.querySelector('.title');
+  const btnSubmit = form.querySelector('button');
+  const swapText = document.querySelector('.swapText');
+  const iconSwapWrapper = document.querySelector('.iconSwap-wrapper');
+  const iconSwap = document.querySelector('.iconSwap');
+  const swapImg = iconSwap.querySelector('img');
   const themeLists = document.querySelectorAll('li');
+  const btnLineBreak = container.querySelector('.btn-lineBreak');
+  const btnClearText = container.querySelector('.btn-clearText');
+  const regex = /[!@#$%&?*^(){}\[\]<>:;,"'~`|\\+_=]/g;
   let color = themeLists[0].dataset.theme; 
   let protocol = 'https://';
+  let lastChar;
+  
+  const swapHowl = new Howl({src: ['mp3/swap.mp3'], volume: 0.03});
+  const selectColorHowl = new Howl({src: ['mp3/selectColor.mp3'], volume: 0.05});
+  const sendDataHowl = new Howl({src: ['mp3/sendData.mp3'], volume: 0.05});
+  const lineBreakHowl = new Howl({src: ['mp3/lineBreak.mp3'], volume: 0.025})
+  const deleteHowl = new Howl({src: ['mp3/delete.mp3'], volume: 0.15});
+  const errorHowl = new Howl({src: ['mp3/error.mp3'], volume: 0.15});
+  const selectCameraHowl = new Howl({src: ['mp3/selectCamera.mp3'], volume: 0.02});
+  const scanTypeChangeHowl = new Howl({src: ['mp3/scanTypeChange.mp3'], volume: 0.02});
+  const fileSelectionHowl = new Howl({src: ['mp3/fileSelection.mp3'], volume: 0.03});
+  const scanActivationHowl = new Howl({src: ['mp3/scanActivation.mp3'], volume: 0.01});
+
+  if(!mobile) {
+    swapHowl.volume(.2); selectColorHowl.volume(.5); sendDataHowl.volume(.5);
+    lineBreakHowl.volume(.3); deleteHowl.volume(1); errorHowl.volume(1);
+    selectCameraHowl.volume(.3); scanTypeChangeHowl.volume(.5); fileSelectionHowl.volume(1);
+    scanActivationHowl.volume(.2);
+  }
+
+  window.addEventListener('load', () => {
+    if(innerWidth > 414) { inputURL.focus() }
+  });
 
   themeLists.forEach(list => {
     list.addEventListener('click', () => {
       resetColor();
+      selectColorHowl.play();
       color = list.dataset.theme;
       list.classList.add('selected');
       inputURL.focus();
     });
   });
 
-  title.addEventListener('click', () => {
-    title.classList.toggle('active');
+  iconSwapWrapper.addEventListener('click', () => {
+    iconSwap.classList.toggle('active');
+    swapText.classList.toggle('active');
     btnLineBreak.classList.toggle('active');
-    if(title.classList.contains('active')) {
+    swapHowl.play();
+    if(iconSwap.classList.contains('active')) {
+      btnLineBreak.addEventListener('click', lineBreak);
+      swapImg.src = 'svg/repeat-colored.svg';
+      swapText.textContent = 'SWAP TO TYPING URL';
+      inputURL.placeholder = 'Enter Text';
       protocol = '';
-    } else { protocol = 'https://'}
+    } else { 
+      btnLineBreak.removeEventListener('click', lineBreak);
+      swapImg.src = 'svg/repeat-enabled.svg';
+      swapText.textContent = 'SWAP TO TYPING TEXT'; 
+      inputURL.placeholder = 'Enter URL';
+      protocol = 'https://'; 
+    }
     inputURL.focus();
   });
 
-  let lastChar;
-  const btnLineBreak = container.querySelector('.btn-lineBreak');
-  btnLineBreak.addEventListener('click', () => {
-    if(inputURL.value === '') { error(btnLineBreak); return}
-    if(!title.classList.contains('active')) { error(btnLineBreak); return}
+  function lineBreak() { //* EventListener
+    if(iconSwap.classList.contains('active') && inputURL.value === '') { 
+      error(btnLineBreak); return;
+    }
     lastChar = inputURL.value.slice(-1);
-    if(lastChar === '*') { inputURL.focus(); error(btnLineBreak); return}
+    if(lastChar === '*') { error(btnLineBreak); return}
+    lineBreakHowl.play();
     inputURL.value = inputURL.value + '*';
     lastChar = inputURL.value.slice(-1);
     inputURL.focus();
-  });
-'\n'
+  }
+
   document.addEventListener('keyup', () => {
     lastChar = ''
-    if(inputURL.value[0] === '*') { error(inputURL); inputURL.value = ''}
-    if(inputURL.value[0] === '＊') { error(inputURL)}
+    if(inputURL.value[0] === '*' || inputURL.value[0] === '＊') { 
+      error(inputURL); 
+      inputURL.value = '';
+    }
   });
 
   form.addEventListener('submit', (e) => {
-    camera.classList.add('inactive'); //*
     e.preventDefault();
-    if(!inputURL.value) { error(inputURL); inputURL.focus(); return }
-    if(!title.classList.contains('active') && !inputURL.value.includes('.')) { error(inputURL); return }
-    if(!title.classList.contains('active') && inputURL.value.includes(' ')) { error(inputURL); return }
-    if(!title.classList.contains('active') && isZenkaku(inputURL.value)) { error(inputURL); return }
-    const regex = /[!@#$%&?*^(){}\[\]<>:;,"'~`|\\+_=]/g;
-    if(!title.classList.contains('active') && inputURL.value.match(regex)) { error(inputURL); return }
-    if(inputURL.value[0].match(/[\x20\u3000]/g)) { error(inputURL); return }
-    if(inputURL.value[0].match(/[\*]/g) || inputURL.value[0].match(/[\＊]/g)) { error(inputURL); return }
-    const duplicate = /[*]{1,}/g;
-    const doubleAsteriskLength = (inputURL.value.match(duplicate) || []).length;
-    for (let i = 0; i < doubleAsteriskLength; i++) { 
-      inputURL.value = inputURL.value.replace(duplicate, '*');
-    }
-    if(inputURL.value.slice(-1) === '*' || inputURL.value.slice(-1) === '＊') { 
-      error(inputURL);  inputURL.value = inputURL.value.slice(0, -1); inputURL.focus(); return;
-    }
-    
+    if(!inputURL.value) return;
+    deleteSpecificCharacter();
+    if(!iconSwap.classList.contains('active') && inputURL.value.includes(' ')) { error(inputURL); return}
+    if(!iconSwap.classList.contains('active') && !inputURL.value.includes('.')) { error(inputURL); return}
+    if(!iconSwap.classList.contains('active') && isFullWidth(inputURL.value)) { error(inputURL); return}
+    if(!iconSwap.classList.contains('active') && inputURL.value.match(regex)) { error(inputURL); return}
+    if(inputURL.value[0].match(/[\x20\u3000]/g)) { error(inputURL); return}
+    if(inputURL.value[0].match(/[\*]/g) || inputURL.value[0].match(/[\＊]/g)) { error(inputURL); return}
+    camera.classList.add('inactive'); //*
     const prevImg = document.querySelector('.qr');
     if(prevImg) return;
     const qrImage = document.createElement('img');
@@ -86,11 +124,13 @@ const container = document.querySelector('.container');
     imageWrapper.appendChild(qrImage);
     inputURL.blur();
     btnLineBreak.classList.add('inactive');
+    btnClearText.classList.remove('active');
     const downloadAnchor = document.createElement('a');
     downloadAnchor.setAttribute('href', '');
     downloadAnchor.classList.add('download-anchor');
     downloadAnchor.textContent = 'Download QR Code';
     imageWrapper.appendChild(downloadAnchor);
+    setTimeout(() => { sendDataHowl.play()}, 0);
     downloadAnchor.addEventListener('click', async (e) => {
       e.preventDefault();
       const response = await fetch(downloadSrc);
@@ -103,7 +143,7 @@ const container = document.querySelector('.container');
       setTimeout(() => { URL.revokeObjectURL(url) }, 0);
     });
   });
-  
+
   inputURL.addEventListener('focus', () => {
     if(!landscape) { camera.classList.remove('inactive')} //*
     const prevImg = document.querySelector('.qr');
@@ -111,18 +151,50 @@ const container = document.querySelector('.container');
     const downloadAnchor = document.querySelector('.download-anchor');
     if(downloadAnchor) { downloadAnchor.remove() }
     btnLineBreak.classList.remove('inactive');
+    btnSubmit.textContent = 'Generate QR Code';
+    btnClearText.classList.add('active');
   });
 
-  inputURL.addEventListener('click', () => {
+  inputURL.addEventListener('blur', () => {
+    if(!inputURL.value) {
+      btnSubmit.textContent = 'QR Code Generator';
+      btnClearText.classList.remove('active');
+    }
+  });
+
+  btnClearText.addEventListener('click', () => {
+    const qr = imageWrapper.querySelector('.qr');
+    if(qr || !inputURL.value) return;
+    btnClearText.classList.remove('active');
+    deleteHowl.play();
     inputURL.value = '';
+    inputURL.focus();
   });
 
-  window.addEventListener('load', () => {
-    if(innerWidth > 414) { inputURL.focus() }
-  });
+  function deleteSpecificCharacter() {
+    const duplicate = /[*]{1,}/g;
+    const duplicateAsteriskLength = (inputURL.value.match(duplicate) || []).length;
+    for (let i = 0; i < duplicateAsteriskLength; i++) { 
+      inputURL.value = inputURL.value.replace(duplicate, '*');
+    }
+    for (let i = 0; i < inputURL.value.length*2; i++) {
+      inputURL.value = inputURL.value.trim();
+      if(inputURL.value[0].match(/[\*]/g) || inputURL.value[0].match(/[\＊]/g)) { 
+        inputURL.value = inputURL.value.slice(1, -1);
+      }
+      if(inputURL.value.slice(-1).match(/[\*]/g) || inputURL.value.slice(-1).match(/[\＊]/g)) { 
+        inputURL.value = inputURL.value.slice(0, -1); 
+      }
+    }
+    if(!iconSwap.classList.contains('active') && inputURL.value.includes(protocol)) { 
+      inputURL.value = inputURL.value.replace(protocol, '');
+    }
+  }
 
   function error(element) {
+    errorHowl.play();
     element.classList.add('error');
+    inputURL.focus();
     setTimeout(() => {
       element.classList.remove('error');
     }, 1000);
@@ -134,9 +206,9 @@ const container = document.querySelector('.container');
     });
   }
 
-  function isZenkaku(str) {
-    for (var i = 0; i < str.length; i++) {
-      var code = str.charCodeAt(i);
+  function isFullWidth(str) {
+    for (let i = 0; i < str.length; i++) {
+      let code = str.charCodeAt(i);
       if (code < 0x20 || code > 0x7E) {
         return true;
       }
@@ -147,7 +219,6 @@ const container = document.querySelector('.container');
 
 //^ html5 qrcode scanner ------------------------------
 
-let landscape = window.matchMedia("(orientation: landscape)").matches;
 const scannerContainer = document.querySelector('.scannerContainer');
 const camera = document.querySelector('.camera');
 	if(landscape) { camera.classList.add('inactive')}
@@ -158,6 +229,7 @@ camera.addEventListener('click', () => {
   scannerContainer.classList.add('active'); 
 	createScanner();
 	camera.remove();
+  selectCameraHowl.play();
 });
 
 function createScanner() {
@@ -180,25 +252,55 @@ function createScanner() {
 	const readerDashboardSection = document.getElementById('reader__dashboard_section');
 		readerDashboardSection.querySelector('div').classList.add('target');
 	const target = readerDashboardSection.querySelector('.target');
-		const divs = target.querySelectorAll('div');
-			divs.forEach((div, index) => {
-				if(index === 2) {
-					div.classList.add('borderElement');
-					div.style.border = '6px dashed #888';
-				}
-			});
-		const borderElement = target.querySelector('.borderElement');
-			borderElement.querySelector('div').classList.add('dropImageScan_text');
-			
+  const divs = target.querySelectorAll('div');
+    divs.forEach((div, index) => {
+      if(index === 2) {
+        div.classList.add('borderElement');
+        div.style.border = '6px dashed #888';
+      }
+    });
+  const borderElement = target.querySelector('.borderElement');
+    borderElement.querySelector('div').classList.add('dropImageScan_text');
+
+  const btnCameraPermission = document.getElementById('html5-qrcode-button-camera-permission');
+  if(btnCameraPermission) {
+    btnCameraPermission.addEventListener('click', () => { selectCameraHowl.play()});
+  }
+	const scanTypeChange = document.getElementById('html5-qrcode-anchor-scan-type-change');
+  const buttonFileSelection = document.getElementById('html5-qrcode-button-file-selection');
+	scanTypeChange.addEventListener('click', () => {
+    scanTypeChangeHowl.play();
+		scanTypeChange.classList.toggle('active');
+		buttonFileSelection.textContent = 'click to choose image';
+		buttonFileSelection.classList.remove('error');
+	});
+  buttonFileSelection.addEventListener('click', () => {
+    fileSelectionHowl.play();
+  });
+  setTimeout(() => {
+    const btnCameraStart = document.getElementById('html5-qrcode-button-camera-start');
+    const btnCameraStop = document.getElementById('html5-qrcode-button-camera-stop');
+    if(btnCameraStart || btnCameraStop) {
+      btnCameraStart.classList.add('scanActivation');
+      btnCameraStop.classList.add('scanActivation');
+        const scanActivations = reader.querySelectorAll('.scanActivation');
+        scanActivations.forEach(btn => {
+          btn.addEventListener('click', () => {
+            scanActivationHowl.play();
+          });
+        });
+    }
+  }, 1000);
+
 	function success(response) {
     if(response[0] === ' ') { error(); return }
 		const result = document.getElementById('result');
-		if(isZenkaku(response) || response.includes(' ') 
+		if(isFullWidth(response) || response.includes(' ') 
 			|| !response.includes('.') || !response.includes('https://')
     || response.match(/[!@#$%&?*^(){}\[\]<>;,"'~`|\\+=]/g)) {
 			result.innerHTML = `<h2>Success</h2>
 			<p class="word-wrapper"></p>`;
-      createRowsWithColumns(result, response);
+      createRows(result, response);
 		} else {
 			result.innerHTML = `<h2>Success</h2>
 			<p class="wrapper"><a class="anchor" href="${response}">${response}</a></p>`;
@@ -231,24 +333,15 @@ function createScanner() {
 			}
 		}
 	});
-
-	const scanTypeChange = document.getElementById('html5-qrcode-anchor-scan-type-change');
-	scanTypeChange.addEventListener('click', () => {
-		scanTypeChange.classList.toggle('active');
-		const buttonFileSelection = document.getElementById('html5-qrcode-button-file-selection');
-		buttonFileSelection.textContent = 'click to choose image';
-		buttonFileSelection.classList.remove('error');
-	});
 } //* END OF CREATE SCANNER
 
-
-  function createRowsWithColumns(result, response) {
+  function createRows(result, response) {
     let sentence = response;
     const lastChar = sentence[sentence.length-1];
-    let zenkakuSpace = (sentence.match(/\u3000/g) || []).length;
-    for (let i = 0; i < zenkakuSpace; i++) { sentence = sentence.replace(/\u3000/g, ' ')}
-    const zenkakuAsteriskLength = (sentence.match(/\＊/g ) || []).length;
-    for (let i = 0; i < zenkakuAsteriskLength; i++) { sentence = sentence.replace('＊', '*')}
+    let fullWidthSpaceLength = (sentence.match(/\u3000/g) || []).length;
+    for (let i = 0; i < fullWidthSpaceLength; i++) { sentence = sentence.replace(/\u3000/g, ' ')}
+    const fullWidthAsteriskLength = (sentence.match(/\＊/g) || []).length;
+    for (let i = 0; i < fullWidthAsteriskLength; i++) { sentence = sentence.replace('＊', '*')}
     const asteriskLength = (sentence.match(/\*/g) || []).length;
     let [idx, prev] = [0,0]; 
     for (let i = 0; i < asteriskLength+1; i++) {
@@ -260,31 +353,74 @@ function createScanner() {
       if(i === asteriskLength) { word.innerHTML += `${lastChar}`}
       prev = idx+1; 
       // console.log('prev '+ prev); //* log
-      if(isZenkaku(word.textContent)) { word.classList.add('zenkakuText')}
+      if(isFullWidth(word.textContent)) { word.classList.add('zenkakuText')}
       const wordWrapper = result.querySelector('.word-wrapper');
       wordWrapper.appendChild(word); 
     }
   }
-  
+
+let menubar, lastCurrentHeight;
+let currentHeight = getComputedStyle(document.body).height;
+const portraitSvhValue = [];
+const landscapeSvhValue = [];
+
+function getPortraitSvh() {
+  if(!landscape && !portraitSvhValue[0]) {
+    const portraitSvh = getComputedStyle(document.body).height;
+    portraitSvhValue.push(portraitSvh);
+    camera.classList.remove('dvh');
+    menubar = true;
+  }
+} getPortraitSvh();
+
+function getLandscapeSvh() {
+  if(landscape && !landscapeSvhValue[0]) {
+    const landscapeSvh = getComputedStyle(document.body).height;
+    landscapeSvhValue.push(landscapeSvh);
+    menubar = true;
+  }
+} getLandscapeSvh();
+
+function setDesktopCameraPosition() {
+  if(!mobile) {
+    if(innerWidth >= 500) { camera.classList.add('desktop')}
+    else { camera.classList.remove('desktop')}
+  } 
+} setDesktopCameraPosition();
+
 
 //* resize out of createScanner
 	window.addEventListener('resize', () => {
-    const qr = imageWrapper.querySelector('.qr')
 		landscape = window.matchMedia("(orientation: landscape)").matches;
-		if(landscape) { camera.classList.add('inactive')}
-		else { if(!qr) { camera.classList.remove('inactive')} }
+    const qr = imageWrapper.querySelector('.qr');
+    if(landscape) { camera.classList.add('inactive')}
+    else { if(!qr) { camera.classList.remove('inactive')} }
+    if(menubar) { getPortraitSvh(); getLandscapeSvh()}
+    if(mobile) {
+      currentHeight = getComputedStyle(document.body).height;
+      if(!landscape) {
+        if(currentHeight > portraitSvhValue) { camera.classList.add('dvh'); menubar = false} 
+        else { camera.classList.remove('dvh'); menubar = true}
+        if(currentHeight < lastCurrentHeight) { getPortraitSvh()}
+      }
+      if(landscape) {
+        if(currentHeight >= landscapeSvhValue) { menubar = false}
+        else { menubar = true}
+      }
+      lastCurrentHeight = currentHeight;
+    }
+    setDesktopCameraPosition();
 	});
-
 
 
 
 //^ ---------------------------------------------------------------------------------------
 
-  // function createRowsWithColumns(result, response) {
+  // function createRows(result, response) {
   //   let sentence = response;
   //   const lastChar = sentence[sentence.length-1];
-  //   let zenkakuSpace = (sentence.match(/\u3000/g) || []).length;
-  //   for (let i = 0; i < zenkakuSpace; i++) { sentence = sentence.replace(/\u3000/g, ' ')}
+  //   let fullWidthSpaceLength = (sentence.match(/\u3000/g) || []).length;
+  //   for (let i = 0; i < fullWidthSpaceLength; i++) { sentence = sentence.replace(/\u3000/g, ' ')}
   //   let whiteSpace = (sentence.match(/\x20/g) || []).length;
   //   // console.log(whiteSpace); //* log
   //   let [idx, prev] = [0,0]; 
@@ -298,9 +434,9 @@ function createScanner() {
   //     prev = idx+1; 
   //     // console.log('prev '+ prev); //* log
   //     if(word.textContent.length >= 14) { word.style.fontSize = .8 +'em'}
-  //     const zenkakuAsteriskLength = (word.textContent.match(/\＊/g ) || []).length;
-  //     console.log(zenkakuAsteriskLength); //*log
-  //     for (let i = 0; i < zenkakuAsteriskLength; i++) {
+  //     const fullWidthAsteriskLength = (word.textContent.match(/\＊/g ) || []).length;
+  //     console.log(fullWidthAsteriskLength); //*log
+  //     for (let i = 0; i < fullWidthAsteriskLength; i++) {
   //       word.textContent = word.textContent.replace('＊', '*');
   //     }
   //     const asteriskLength = (word.textContent.match(/\*/g ) || []).length;
