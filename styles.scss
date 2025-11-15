@@ -318,11 +318,36 @@ body {
       font-size: .8em !important;
     }
     #reader__scan_region {
+      position: relative;
       width: 360px;
       max-height: 360px;
       video {
         width: 360px;
         max-height: 360px;
+      }
+      img:not(.scanImage) {
+        display: none !important;
+      }
+      .scanImageContainer {
+        position: absolute;
+        mix-blend-mode: multiply;
+        top: -20%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 250px;
+        height: 250px;
+        &.fileImage {
+          top: 10%;
+          left: 53%;
+          transform: translate(-50%, -50%);
+          width: 180px;
+          height: 150px;
+          opacity: .8;
+        }
+        img.scanImage {
+          width: 100%;
+          height: 100%;
+        }
       }
     }
     #reader__dashboard_section {

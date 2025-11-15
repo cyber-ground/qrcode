@@ -236,57 +236,92 @@ function createScanner() {
 		<a class="btnTop" href="">BACK TO TOP</a>`
 	);
 	const scanner = new Html5QrcodeScanner('reader', {
-		qrbox: {width: 225, height: 225},
-		fsp: 20,
+		qrbox: {width: 225, height: 225}, fsp: 20
 	});
-	scanner.render(success, error);
-
+	scanner.render(success, error); //*
 	const reader = document.getElementById('reader');
+  const readerScanRegion = document.getElementById('reader__scan_region');
+  let scanImageContainer, iid_video;
+
+  function createScanImageContainer() {
+    const iid = setInterval(() => {
+      readerScanRegion.innerHTML = `<div class="scanImageContainer"><img class="scanImage" src="img/scanPhoto.jpg"></div>`;
+      scanImageContainer = readerScanRegion.querySelector('.scanImageContainer');
+      if(scanImageContainer) { clearInterval(iid)}
+      console.log(scanImageContainer);
+    }, 100);
+  } createScanImageContainer();
+
+  iid_video = setInterval(() => {
+    const video = readerScanRegion.querySelector('video');
+    if(video) {
+      scanImageContainer.remove();
+      clearInterval(iid_video);
+    } 
+  }, 100);
+
 	const readerFirstChild = reader.querySelector('div');
 		readerFirstChild.classList.add('reader__first_child');
+  const readerHeaderMassage = readerFirstChild.querySelector('#reader__header_message');
 	const info = readerFirstChild.querySelector('img');
 		info.classList.add('info-icon');
 	const readerDashboardSection = document.getElementById('reader__dashboard_section');
 		readerDashboardSection.querySelector('div').classList.add('target');
 	const target = readerDashboardSection.querySelector('.target');
-  const divs = target.querySelectorAll('div');
-    divs.forEach((div, index) => {
-      if(index === 2) {
-        div.classList.add('borderElement');
-        div.style.border = '6px dashed #888';
-      }
+  const targetDivs = target.querySelectorAll('div');
+    targetDivs.forEach((div, index) => {
+      if(index === 2) { div.classList.add('borderElement'); div.style.border = '6px dashed #888'}
     });
   const borderElement = target.querySelector('.borderElement');
     borderElement.querySelector('div').classList.add('dropImageScan_text');
-
   const btnCameraPermission = document.getElementById('html5-qrcode-button-camera-permission');
-  if(btnCameraPermission) {
-    btnCameraPermission.addEventListener('click', () => { selectCameraHowl.play()});
-  }
+    if(btnCameraPermission) {
+      btnCameraPermission.addEventListener('click', () => {
+        selectCameraHowl.play();
+        readerHeaderMassage.textContent = ''; //*
+      });
+    }
 	const scanTypeChange = document.getElementById('html5-qrcode-anchor-scan-type-change');
+    scanTypeChange.addEventListener('click', () => {
+      clearInterval(iid_video); //*
+      readerScanRegion.innerHTML = ''
+      scanTypeChange.classList.toggle('swapImage');
+      setTimeout(() => {
+        readerScanRegion.innerHTML = `<div class="scanImageContainer"><img class="scanImage" src="img/filePhoto.png"></div>`;
+        scanImageContainer = readerScanRegion.querySelector('.scanImageContainer');
+        if(scanTypeChange.classList.contains('swapImage')) {
+          scanImageContainer.classList.add('fileImage');
+          const scanImage = scanImageContainer.querySelector('.scanImage');
+          scanImage.src = 'img/filePhoto.png';
+        } else {
+          scanImageContainer.classList.remove('fileImage');
+          const scanImage = scanImageContainer.querySelector('.scanImage');
+          scanImage.src = 'img/scanPhoto.jpg';
+        }
+      }, 100);
+      scanTypeChangeHowl.play();
+      scanTypeChange.classList.toggle('active');
+      buttonFileSelection.textContent = 'click to choose image';
+      buttonFileSelection.classList.remove('error');
+    });
   const buttonFileSelection = document.getElementById('html5-qrcode-button-file-selection');
-	scanTypeChange.addEventListener('click', () => {
-    scanTypeChangeHowl.play();
-		scanTypeChange.classList.toggle('active');
-		buttonFileSelection.textContent = 'click to choose image';
-		buttonFileSelection.classList.remove('error');
-	});
-  buttonFileSelection.addEventListener('click', () => {
-    fileSelectionHowl.play();
-  });
-  const iid = setInterval(() => {
+    buttonFileSelection.addEventListener('click', () => {
+      fileSelectionHowl.play();
+    });
+  const iid_btnCameraScanActivation = setInterval(() => {
     const btnCameraStart = document.getElementById('html5-qrcode-button-camera-start');
     const btnCameraStop = document.getElementById('html5-qrcode-button-camera-stop');
     if(btnCameraStart || btnCameraStop) {
       btnCameraStart.classList.add('scanActivation');
       btnCameraStop.classList.add('scanActivation');
       const scanActivations = reader.querySelectorAll('.scanActivation');
-      scanActivations.forEach(btn => {
+      scanActivations.forEach((btn, index) => {
         btn.addEventListener('click', () => {
           scanActivationHowl.play();
+          if(index === 1) { createScanImageContainer()} //* btnCameraStop /////////////////////////////////
         });
       });
-      clearInterval(iid);
+      clearInterval(iid_btnCameraScanActivation);
     }
   }, 100);
 

@@ -306,12 +306,37 @@ body.success {
   font-size: 0.8em !important;
 }
 .scannerContainer #reader #reader__scan_region {
+  position: relative;
   width: 360px;
   max-height: 360px;
 }
 .scannerContainer #reader #reader__scan_region video {
   width: 360px;
   max-height: 360px;
+}
+.scannerContainer #reader #reader__scan_region img:not(.scanImage) {
+  display: none !important;
+}
+.scannerContainer #reader #reader__scan_region .scanImageContainer {
+  position: absolute;
+  mix-blend-mode: multiply;
+  top: -20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 250px;
+  height: 250px;
+}
+.scannerContainer #reader #reader__scan_region .scanImageContainer.fileImage {
+  top: 10%;
+  left: 53%;
+  transform: translate(-50%, -50%);
+  width: 180px;
+  height: 150px;
+  opacity: 0.8;
+}
+.scannerContainer #reader #reader__scan_region .scanImageContainer img.scanImage {
+  width: 100%;
+  height: 100%;
 }
 .scannerContainer #reader #reader__dashboard_section {
   position: relative;
