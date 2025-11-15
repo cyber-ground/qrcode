@@ -24,6 +24,12 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: '07LogoTypeGothic7';
+  src: url('./font/07LogoTypeGothic7.ttf') format('truetype');
+  font-display: swap;
+}
+
 // -----------------------------------------------
 //* QR Code Generator ---
 
@@ -33,7 +39,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100dvh;
-  background-color: #e1e1e1; //bc#fff
+  background-color: #e1e1e1;
   padding: 20px 0; //*
   background-image: url(img/stickers.jpg);
   background-position: center;
@@ -41,17 +47,6 @@ body {
   &.success {
     background-image: initial;
   }
-  // &.success::before {
-  //   content: '';
-  //   z-index: 1;
-  //   position: absolute;
-  //   inset: 0;
-  //   background-image: url(img/stickers.jpg);
-  //   background-position: center;
-  //   background-size: cover;
-  //   pointer-events: none;
-  //   opacity: .06;
-  // }
   @media (max-width: 414px) {
     background-image: url(img/stickers1.jpg);
     min-height: 100dvh; //*
@@ -60,9 +55,10 @@ body {
 }
 
 .container {
+  position: relative;
   width: 90%; //*
   max-width: 400px; //*
-  padding: 25px 30px 15px; 
+  padding: 25px 30px 20px; 
   background-color: #fff;
   border-radius: 10px;
   border: 2px solid #333;
@@ -71,17 +67,44 @@ body {
   }
   .wrapper {
     margin-bottom: 20px;
-    h1.title {
-      color: #333;
-      font-size: 1.6em;
-      font-weight: bold;
-      margin-bottom: 10px;
+    .iconSwap-wrapper {
+      width: 100%;
+      height: 35px;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      cursor: pointer;
-      &.active { 
-        color: #5100ff;
+      margin-bottom: 15px;
+      i.iconSwap { 
+        display: inline-block;
+        width: 35px;
+        aspect-ratio: 1;
+        border: 2px solid #777;
+        border-radius: 5px;
+        cursor: pointer;
+        &.active { 
+          border: 2px solid #5f53ff;
+          background-color: #5f53ff;
+        }
+        img {
+          display: inline-block;
+          transform: rotate(60deg);
+        }
+      }
+      p.swapText {
+        width: 85%;
+        height: 35px;
+        color: #333;
+        font-size: 1.2em;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 5px;
+        padding: 8px 0 5px;
+        &.active { 
+          color: #5100ff;
+        }
       }
     }
     ul {
@@ -151,6 +174,7 @@ body {
       }
       &::placeholder {
         letter-spacing: 1px;
+        color: #666;
       }
     }
     .image-wrapper {
@@ -188,30 +212,57 @@ body {
       }
     }
   }
-  .btn-lineBreak {
-    position: relative;
+  .btn-wrapper {
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-family: 'iceberg';
-    width: 100px;
-    height: 10px;
-    color: #fff;
-    background-color: #0af;
-    text-transform: uppercase;
-    border-radius: 5px;
-    padding: 12px 0 10px;
-    margin: 12px auto 0;
-    opacity: .3;
-    &.active {
-      opacity: 1;
-    }
-    &.inactive {
+    justify-content: center;
+    margin-top: 15px;
+    .btn-lineBreak {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'iceberg';
+      width: 120px;
+      height: 10px;
+      color: #fff;
+      background-color: #07f;
+      border: 1px solid #07f;
+      text-transform: uppercase;
+      border-radius: 5px;
+      padding: 12px 0 10px;
       opacity: .3;
-      pointer-events: none;
+      font-size: 1.1em;
+      &.active {
+        opacity: 1;
+      }
+      &.inactive {
+        opacity: .3;
+        pointer-events: none;
+      }
+      &.error {
+        animation: vibrate .05s linear 10;
+      }
     }
-    &.error {
-      animation: vibrate .05s linear 10;
+    .btn-clearText {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'iceberg';
+      width: 120px;
+      height: 10px;
+      color: #ff0066;
+      border: 1px solid #ff0066;
+      text-transform: uppercase;
+      border-radius: 5px;
+      padding: 12px 0 10px;
+      opacity: .3;
+      margin-left: 8px;
+      font-size: 1.1em;
+      &.active {
+        opacity: 1;
+      }
     }
   }
 }
@@ -235,7 +286,7 @@ body {
   }
 }
 
-//^ -----------------------------------
+//^ scanner ----------------------------------
 
 .scannerContainer {
   font-family: 'AKONY';
@@ -366,6 +417,7 @@ body {
         word-wrap: break-word;
         word-break: break-word;
         &.zenkakuText {
+          font-family: '07LogoTypeGothic7';
           font-size: 1em;
         }
       }
@@ -396,22 +448,26 @@ body {
 
 .camera {
   position: absolute;
-  top: 17.4%;
+  top: 15.5%;
   width: 50px;
   height: 50px;
   background-color: #dfdfdf;
   border: 2px solid #000;
   border-radius: 6px;
   z-index: 100;
+  &.desktop {
+    top: 32%;
+  }
+  &.dvh {
+    top: 21.5%;
+  }
   &.inactive {
-    visibility: hidden;
+    display: none;
   }
   img {
     position: absolute;
   }
 }
-
-
 
 
 

@@ -414,42 +414,10 @@ function setDesktopCameraPosition() {
 
 
 
-//^ ---------------------------------------------------------------------------------------
 
-  // function createRows(result, response) {
-  //   let sentence = response;
-  //   const lastChar = sentence[sentence.length-1];
-  //   let fullWidthSpaceLength = (sentence.match(/\u3000/g) || []).length;
-  //   for (let i = 0; i < fullWidthSpaceLength; i++) { sentence = sentence.replace(/\u3000/g, ' ')}
-  //   let whiteSpace = (sentence.match(/\x20/g) || []).length;
-  //   // console.log(whiteSpace); //* log
-  //   let [idx, prev] = [0,0]; 
-  //   for (let i = 0; i < whiteSpace+1; i++) {
-  //     idx = sentence.indexOf(' ',idx + 1);
-  //     // console.log('idx '+ idx); //* log
-  //     const word = document.createElement('div');
-  //     word.classList.add(`word${i+1}`,'word');
-  //     word.innerHTML = sentence.slice(prev,idx).replace(/\S/g,`$&`);
-  //     if(i === whiteSpace) { word.innerHTML += `${lastChar}`}
-  //     prev = idx+1; 
-  //     // console.log('prev '+ prev); //* log
-  //     if(word.textContent.length >= 14) { word.style.fontSize = .8 +'em'}
-  //     const fullWidthAsteriskLength = (word.textContent.match(/\＊/g ) || []).length;
-  //     console.log(fullWidthAsteriskLength); //*log
-  //     for (let i = 0; i < fullWidthAsteriskLength; i++) {
-  //       word.textContent = word.textContent.replace('＊', '*');
-  //     }
-  //     const asteriskLength = (word.textContent.match(/\*/g ) || []).length;
-  //     for (let i = 0; i < asteriskLength; i++) {
-  //       word.textContent = word.textContent.replace('*', ' ');
-  //     }
-  //     console.log(asteriskLength); //*log
-  //     const wordWrapper = result.querySelector('.word-wrapper');
-  //     wordWrapper.appendChild(word); 
-  //   }
-  // }
 
-//^ ---------------------------------------------------------------------------------------
+
+
 
 // ---------------------------------------------------------------------------------------
 //                           ----- QR CODE JS DOWNLOAD 1.-----
