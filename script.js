@@ -179,11 +179,8 @@ import {console_color,console_red,console_green,console_yellow,
     }
     for (let i = 0; i < inputURL.value.length*2; i++) {
       inputURL.value = inputURL.value.trim();
-      if(inputURL.value[0].match(/[\*]/g) || inputURL.value[0].match(/[\＊]/g)) { 
-        inputURL.value = inputURL.value.slice(1, -1);
-      }
-      if(inputURL.value.slice(-1).match(/[\*]/g) || inputURL.value.slice(-1).match(/[\＊]/g)) { 
-        inputURL.value = inputURL.value.slice(0, -1); 
+      if(inputURL.value[0].match(/[\*|\＊]/g) || inputURL.value.slice(-1).match(/[\*|\＊]/g)) { 
+        inputURL.value = inputURL.value.replace(/[\*|\＊]/g, '');
       }
     }
     if(!iconSwap.classList.contains('active') && inputURL.value.includes(protocol)) { 
