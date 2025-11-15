@@ -316,7 +316,7 @@ function createScanner() {
       scanActivations.forEach((btn, index) => {
         btn.addEventListener('click', () => {
           scanActivationHowl.play();
-          if(index === 1) { createScanImageContainer()} //* btnCameraStop /////////////////////////////////
+          if(index === 1) { createScanImageContainer()} //* btnCameraStop *//
         });
       });
       clearInterval(iid_btnCameraScanActivation);
@@ -364,7 +364,7 @@ function createScanner() {
 			}
 		}
 	});
-} //* END OF CREATE SCANNER
+} //* END OF CREATE SCANNER FUNC
 
   function createRows(result, response) {
     let sentence = response;
