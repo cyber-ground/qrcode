@@ -277,20 +277,21 @@ function createScanner() {
   buttonFileSelection.addEventListener('click', () => {
     fileSelectionHowl.play();
   });
-  setTimeout(() => {
+  const iid = setInterval(() => {
     const btnCameraStart = document.getElementById('html5-qrcode-button-camera-start');
     const btnCameraStop = document.getElementById('html5-qrcode-button-camera-stop');
     if(btnCameraStart || btnCameraStop) {
       btnCameraStart.classList.add('scanActivation');
       btnCameraStop.classList.add('scanActivation');
-        const scanActivations = reader.querySelectorAll('.scanActivation');
-        scanActivations.forEach(btn => {
-          btn.addEventListener('click', () => {
-            scanActivationHowl.play();
-          });
+      const scanActivations = reader.querySelectorAll('.scanActivation');
+      scanActivations.forEach(btn => {
+        btn.addEventListener('click', () => {
+          scanActivationHowl.play();
         });
+      });
+      clearInterval(iid);
     }
-  }, 1000);
+  }, 100);
 
 	function success(response) {
     if(response[0] === ' ') { error(); return }
