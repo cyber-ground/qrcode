@@ -7,7 +7,6 @@ import {console_color,console_red,console_green,console_yellow,
 //*                       ----- QR CODE GENERATOR & SCANNER -----
 // ---------------------------------------------------------------------------------------
 
-
   let landscape = window.matchMedia("(orientation: landscape)").matches;
   const mobile = navigator.userAgent.match(/iPhone|Android.+Mobile/);
   const container = document.querySelector('.container');
@@ -248,7 +247,6 @@ function createScanner() {
       readerScanRegion.innerHTML = `<div class="scanImageContainer"><img class="scanImage" src="img/scanPhoto.jpg"></div>`;
       scanImageContainer = readerScanRegion.querySelector('.scanImageContainer');
       if(scanImageContainer) { clearInterval(iid)}
-      console.log(scanImageContainer);
     }, 100);
   } createScanImageContainer();
 
@@ -284,7 +282,7 @@ function createScanner() {
 	const scanTypeChange = document.getElementById('html5-qrcode-anchor-scan-type-change');
     scanTypeChange.addEventListener('click', () => {
       clearInterval(iid_video); //*
-      readerScanRegion.innerHTML = ''
+      readerScanRegion.innerHTML = '';
       scanTypeChange.classList.toggle('swapImage');
       setTimeout(() => {
         readerScanRegion.innerHTML = `<div class="scanImageContainer"><img class="scanImage" src="img/filePhoto.png"></div>`;
