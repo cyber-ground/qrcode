@@ -1,14 +1,4 @@
 @font-face {
-  font-family: "Poppins-Regular";
-  src: url("./font/Poppins-Regular.ttf") format("truetype");
-  font-display: swap;
-}
-@font-face {
-  font-family: "Poppins-Bold";
-  src: url("./font/Poppins-Bold.ttf") format("truetype");
-  font-display: swap;
-}
-@font-face {
   font-family: "Orbitron-Regular";
   src: url("./font/Orbitron-Regular.ttf") format("truetype");
   font-display: swap;
@@ -34,7 +24,7 @@
   font-display: swap;
 }
 body {
-  font-family: "Poppins-Bold";
+  font-family: "Poppins", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -100,6 +90,7 @@ body.success {
   height: 35px;
   color: #333;
   font-size: 1.2em;
+  font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -115,6 +106,7 @@ body.success {
   justify-content: space-between;
   align-items: center;
   font-size: 1.2em;
+  font-weight: bold;
   margin-left: 10px;
 }
 .container .wrapper ul li {
@@ -159,8 +151,6 @@ body.success {
   box-shadow: 0 0 0 3px #fff, 0 0 0 6px #b0f;
 }
 .container form input {
-  font-family: "Poppins-Regular";
-  font-size: 1.1em;
   width: 100%;
   border: 2px solid #000;
   border-radius: 3px;
@@ -176,7 +166,6 @@ body.success {
   animation: vibrate 0.05s linear 10;
 }
 .container form input::placeholder {
-  font-family: "Poppins-Regular";
   letter-spacing: 1px;
   color: #666;
 }
@@ -189,7 +178,6 @@ body.success {
   border-radius: 10px;
 }
 .container form .image-wrapper .download-anchor {
-  font-family: "Poppins-Regular";
   color: #08f;
   width: max-content;
   display: block;
@@ -204,6 +192,7 @@ body.success {
   letter-spacing: 0.5px;
   background-color: #5f53ff;
   font-size: 1.2em;
+  font-weight: bold;
   width: 100%;
   padding: 15px 20px;
   border-radius: 10px;
@@ -466,7 +455,7 @@ body.success {
 
 .camera {
   position: absolute;
-  top: 15.4%;
+  top: 15.5%;
   width: 50px;
   height: 50px;
   background-color: #dfdfdf;
@@ -478,7 +467,7 @@ body.success {
   top: 32%;
 }
 .camera.dvh {
-  top: 21.4%;
+  top: 21.5%;
 }
 .camera.inactive {
   display: none;
