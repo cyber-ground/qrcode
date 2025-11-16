@@ -1,11 +1,21 @@
 @font-face {
+  font-family: "Poppins-Regular";
+  src: url("./font/Poppins-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins-Bold";
+  src: url("./font/Poppins-Bold.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
   font-family: "Orbitron-Regular";
   src: url("./font/Orbitron-Regular.ttf") format("truetype");
   font-display: swap;
 }
 @font-face {
   font-family: "Orbitron-Bold";
-  src: url("./font/Orbitron-Regular.ttf") format("truetype");
+  src: url("./font/Orbitron-Bold.ttf") format("truetype");
   font-display: swap;
 }
 @font-face {
@@ -24,7 +34,7 @@
   font-display: swap;
 }
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins-Bold";
   display: flex;
   justify-content: center;
   align-items: center;
@@ -90,7 +100,6 @@ body.success {
   height: 35px;
   color: #333;
   font-size: 1.2em;
-  font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -106,7 +115,6 @@ body.success {
   justify-content: space-between;
   align-items: center;
   font-size: 1.2em;
-  font-weight: bold;
   margin-left: 10px;
 }
 .container .wrapper ul li {
@@ -151,6 +159,8 @@ body.success {
   box-shadow: 0 0 0 3px #fff, 0 0 0 6px #b0f;
 }
 .container form input {
+  font-family: "Poppins-Regular";
+  font-size: 1.1em;
   width: 100%;
   border: 2px solid #000;
   border-radius: 3px;
@@ -166,6 +176,7 @@ body.success {
   animation: vibrate 0.05s linear 10;
 }
 .container form input::placeholder {
+  font-family: "Poppins-Regular";
   letter-spacing: 1px;
   color: #666;
 }
@@ -178,6 +189,7 @@ body.success {
   border-radius: 10px;
 }
 .container form .image-wrapper .download-anchor {
+  font-family: "Poppins-Regular";
   color: #08f;
   width: max-content;
   display: block;
@@ -192,7 +204,6 @@ body.success {
   letter-spacing: 0.5px;
   background-color: #5f53ff;
   font-size: 1.2em;
-  font-weight: bold;
   width: 100%;
   padding: 15px 20px;
   border-radius: 10px;
@@ -344,7 +355,7 @@ body.success {
   flex-direction: column;
 }
 .scannerContainer #reader #reader__dashboard_section #html5-qrcode-select-camera {
-  font-family: "Orbitron-Bold";
+  font-family: "Orbitron-Regular";
   margin-top: 10px;
 }
 .scannerContainer #reader #reader__dashboard_section #reader__dashboard_section_csr span:nth-of-type(1) {
@@ -382,10 +393,11 @@ body.success {
   display: inline-block;
   width: 95%;
   font-size: 0.9em;
+  line-height: 1.1;
   color: #ebebeb;
   background-color: #793bdc;
   border-radius: 10px;
-  padding: 5px 10px 2px;
+  padding: 5px 10px 3px;
   margin-top: 5px !important;
 }
 .scannerContainer #reader #reader__dashboard_section #html5-qrcode-anchor-scan-type-change.active {
@@ -396,6 +408,7 @@ body.success {
   background-color: #f3f3f3;
   border-radius: 5px;
   padding: 5px 0;
+  line-height: 1.1;
 }
 .scannerContainer #reader #reader__dashboard_section .borderElement #html5-qrcode-button-file-selection.error {
   font-size: 0.5em;
@@ -403,6 +416,8 @@ body.success {
 .scannerContainer #reader #reader__dashboard_section .borderElement .dropImageScan_text {
   color: #000;
   margin-top: 10px;
+  font-size: 0.99em;
+  line-height: 1.2;
 }
 .scannerContainer #result {
   text-align: center;
@@ -455,7 +470,7 @@ body.success {
 
 .camera {
   position: absolute;
-  top: 15.5%;
+  top: 15.4%;
   width: 50px;
   height: 50px;
   background-color: #dfdfdf;
@@ -467,7 +482,7 @@ body.success {
   top: 32%;
 }
 .camera.dvh {
-  top: 21.5%;
+  top: 21.4%;
 }
 .camera.inactive {
   display: none;

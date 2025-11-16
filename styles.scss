@@ -1,6 +1,17 @@
 @charset "utf-8";
 
 @font-face {
+  font-family: 'Poppins-Regular';
+  src: url('./font/Poppins-Regular.ttf') format('truetype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Poppins-Bold';
+  src: url('./font/Poppins-Bold.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'Orbitron-Regular';
   src: url('./font/Orbitron-Regular.ttf') format('truetype');
   font-display: swap;
@@ -8,7 +19,7 @@
 
 @font-face {
   font-family: 'Orbitron-Bold';
-  src: url('./font/Orbitron-Regular.ttf') format('truetype');
+  src: url('./font/Orbitron-Bold.ttf') format('truetype');
   font-display: swap;
 }
 
@@ -34,7 +45,7 @@
 //* QR Code Generator ---
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins-Bold';
   display: flex;
   justify-content: center;
   align-items: center;
@@ -95,7 +106,6 @@ body {
         height: 35px;
         color: #333;
         font-size: 1.2em;
-        font-weight: bold;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -112,7 +122,6 @@ body {
       justify-content: space-between;
       align-items: center;
       font-size: 1.2em;
-      font-weight: bold;
       margin-left: 10px;
       li {
         width: 15px;
@@ -159,6 +168,8 @@ body {
   }
   form {
     input {
+      font-family: 'Poppins-Regular';
+      font-size: 1.1em;
       width: 100%;
       border: 2px solid #000;
       border-radius: 3px;
@@ -173,6 +184,7 @@ body {
         animation: vibrate .05s linear 10;
       }
       &::placeholder {
+        font-family: 'Poppins-Regular';
         letter-spacing: 1px;
         color: #666;
       }
@@ -185,6 +197,7 @@ body {
         border-radius: 10px;
       }
       .download-anchor {
+        font-family: 'Poppins-Regular';
         color: #08f;
         width: max-content;
         display: block;
@@ -200,7 +213,6 @@ body {
       letter-spacing: .5px;
       background-color: #5f53ff;
       font-size: 1.2em;
-      font-weight: bold;
       width: 100%;
       padding: 15px 20px;
       border-radius: 10px;
@@ -355,7 +367,7 @@ body {
       display: flex;
       flex-direction: column;
       #html5-qrcode-select-camera {
-        font-family: 'Orbitron-Bold';
+        font-family: 'Orbitron-Regular';
         margin-top: 10px;
       }
       #reader__dashboard_section_csr {
@@ -395,10 +407,11 @@ body {
         display: inline-block;
         width: 95%;
         font-size: .9em;
+        line-height: 1.1;
         color: #ebebeb;
         background-color: #793bdc;
         border-radius: 10px;
-        padding: 5px 10px 2px;
+        padding: 5px 10px 3px;
         margin-top: 5px !important;
         &.active {
           font-size: .95em;
@@ -410,6 +423,7 @@ body {
           background-color: #f3f3f3;
           border-radius: 5px;
           padding: 5px 0;
+          line-height: 1.1;
           &.error {
             font-size: .5em;
           }
@@ -417,6 +431,8 @@ body {
         .dropImageScan_text {
           color: #000;
           margin-top: 10px;
+          font-size: .99em;
+          line-height: 1.2;
         }
       }
     }
@@ -473,7 +489,7 @@ body {
 
 .camera {
   position: absolute;
-  top: 15.5%;
+  top: 15.4%;
   width: 50px;
   height: 50px;
   background-color: #dfdfdf;
@@ -484,7 +500,7 @@ body {
     top: 32%;
   }
   &.dvh {
-    top: 21.5%;
+    top: 21.4%;
   }
   &.inactive {
     display: none;
