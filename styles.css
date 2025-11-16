@@ -86,6 +86,7 @@ body.success {
   transform: rotate(60deg);
 }
 .container .wrapper .iconSwap-wrapper p.swapText {
+  font-family: "Poppins";
   width: 85%;
   height: 35px;
   color: #333;
