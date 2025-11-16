@@ -92,6 +92,7 @@ import {console_color,console_red,console_green,console_yellow,
         inputURL.setSelectionRange(cursorPosition, cursorPosition);
         cursorPosition = inputURL.selectionStart;
         replaceInputFieldValue();
+        lineBreakHowl.play();
         return;
       }
     }
