@@ -301,6 +301,7 @@ function createScanner() {
       });
     }
 	const scanTypeChange = document.getElementById('html5-qrcode-anchor-scan-type-change');
+    if(mobile) { scanTypeChange.classList.add('mobile')}
     scanTypeChange.addEventListener('click', () => {
       clearInterval(iid_video); //*
       readerScanRegion.innerHTML = '';
@@ -435,8 +436,8 @@ function getLandscapeSvh() {
 
 function setDesktopCameraPosition() {
   if(!mobile) {
-    if(innerWidth >= 500) { camera.classList.add('desktop')}
-    else { camera.classList.remove('desktop')}
+    const containerRect = container.getBoundingClientRect();
+    camera.style.top = containerRect.top - camera.clientHeight - 10 + 'px';
   } 
 } setDesktopCameraPosition();
 
@@ -472,69 +473,6 @@ function setDesktopCameraPosition() {
 
 
 // ---------------------------------------------------------------------------------------
-//                           ----- QR CODE JS DOWNLOAD 1.-----
-// ---------------------------------------------------------------------------------------
-
-
-// new QRCode(document.getElementById("qrcode"), {
-// 	text: "hello\nworld\nhello\nworld",
-// 	// text: "https://www.google.com",
-// 	width: 600,
-// 	height: 600,
-// 	colorDark: "#f00",
-// 	colorLight: "#dfdfdf",
-// 	correctLevel: QRCode.CorrectLevel.H,
-// });
-
-// const qr = document.getElementById("qrcode");
-// const qrImage = qr.querySelector('img');
-
-// function downloadQR() {
-//   var link = document.createElement('a');
-//   link.download = 'qrcode.png';
-//   link.href = qrImage.src;
-//   link.click();
-// } 
-
-
-// document.addEventListener('click', () => {
-//   downloadQR();
-// });
-
-// ---------------------------------------------------------------------------------------
-//                          ----- QR CODE JS DOWNLOAD 2.-----
-// ---------------------------------------------------------------------------------------
-
-// const createQR = (url) => {
-//   let qrcodeContainer = document.getElementById("qrcode");
-//     qrcodeContainer.innerHTML = "";
-//   let qr = new QRious({
-//     element: qrcodeContainer,
-//     value: url,
-//     size: 600,
-//     foreground: "#06f",
-//     background: "#dfdfdf",
-//     padding: 20,
-//     // value: 'https://google.com'
-//   }); 
-// }
-
-// function downloadQR() {
-//   var link = document.createElement('a');
-//   link.download = 'qrcode.png';
-//   link.href = document.getElementById('qrcode').toDataURL()
-//   link.click();
-// } 
-
-// createQR('hello\nworld\nhello\nworld');
-
-// document.addEventListener('click', () => {
-//   downloadQR();
-// });
-
-
-// ---------------------------------------------------------------------------------------
-
 
 
 

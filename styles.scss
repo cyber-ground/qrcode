@@ -411,10 +411,13 @@ body {
         color: #ebebeb;
         background-color: #793bdc;
         border-radius: 10px;
-        padding: 5px 10px 3px;
+        padding: 6px 10px 2px;
         margin-top: 5px !important;
         &.active {
           font-size: .95em;
+        }
+        &.mobile {
+          padding: 6px 10px 4px;
         }
       }
       .borderElement {
@@ -496,9 +499,6 @@ body {
   border: 2px solid #000;
   border-radius: 6px;
   z-index: 100;
-  &.desktop {
-    top: 32%;
-  }
   &.dvh {
     top: 21.4%;
   }
@@ -518,49 +518,7 @@ body {
 
 
 
-
-
-
 // -----------------------------------------------
-// QR Code.js Download 1.---
-
-// #qrcode {
-//   background-color: #dfdfdf;
-//   border-radius: 5px;
-//   overflow: hidden;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   padding: 20px;
-//   width: 620px;
-//   height: 620px;
-//   margin: auto;
-// }
-
-
-// -----------------------------------------------
-// QR Code.js Download 2.---
-
-// body {
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   min-height: ;
-// }
-
-// #qrcode {
-//   border-radius: 10px;
-//   overflow: hidden;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// }
-
-
-// -----------------------------------------------
-
-
-
 
 
 

@@ -397,11 +397,14 @@ body.success {
   color: #ebebeb;
   background-color: #793bdc;
   border-radius: 10px;
-  padding: 5px 10px 3px;
+  padding: 6px 10px 2px;
   margin-top: 5px !important;
 }
 .scannerContainer #reader #reader__dashboard_section #html5-qrcode-anchor-scan-type-change.active {
   font-size: 0.95em;
+}
+.scannerContainer #reader #reader__dashboard_section #html5-qrcode-anchor-scan-type-change.mobile {
+  padding: 6px 10px 4px;
 }
 .scannerContainer #reader #reader__dashboard_section .borderElement #html5-qrcode-button-file-selection {
   color: #ff3700;
@@ -477,9 +480,6 @@ body.success {
   border: 2px solid #000;
   border-radius: 6px;
   z-index: 100;
-}
-.camera.desktop {
-  top: 32%;
 }
 .camera.dvh {
   top: 21.4%;
