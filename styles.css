@@ -98,6 +98,7 @@ body.success {
   cursor: pointer;
   border-radius: 5px;
   padding: 8px 0 5px;
+  opacity: 0;
 }
 .container .wrapper .iconSwap-wrapper p.swapText.active {
   color: #5100ff;
