@@ -24,7 +24,7 @@ import {console_color,console_red,console_green,console_yellow,
   const regex = /[!@#$%&?*^(){}\[\]<>:;,"'~`|\\+_=]/g;
   let color = themeLists[0].dataset.theme; 
   let protocol = 'https://';
-  let lastChar;
+  let lastChar, cursorPosition;
   
   const swapHowl = new Howl({src: ['mp3/swap.mp3'], volume: 0.03});
   const selectColorHowl = new Howl({src: ['mp3/selectColor.mp3'], volume: 0.05});
@@ -83,17 +83,34 @@ import {console_color,console_red,console_green,console_yellow,
     if(iconSwap.classList.contains('active') && inputURL.value === '') { 
       error(btnLineBreak); return;
     }
+    cursorPosition = inputURL.selectionStart;
+    if(cursorPosition === 0) { error(btnLineBreak); return}
     lastChar = inputURL.value.slice(-1);
+    if(inputURL.value.slice(-1).match(/[\*|\＊]/g)) { 
+      if(cursorPosition !== inputURL.value.length) {
+        inputURL.value = inputURL.value.slice(0, -1);
+        inputURL.setSelectionRange(cursorPosition, cursorPosition);
+        cursorPosition = inputURL.selectionStart;
+        replaceInputFieldValue();
+        return;
+      }
+    }
     if(lastChar === '*') { error(btnLineBreak); return}
     lineBreakHowl.play();
-    inputURL.value = inputURL.value + '*';
+    replaceInputFieldValue();
+    // inputURL.value = inputURL.value + '*'; //*og only end of text
+  }
+
+  function replaceInputFieldValue() {
+    inputURL.value = inputURL.value.slice(0, cursorPosition-1) 
+    + (inputURL.value[cursorPosition-1] + '*') + inputURL.value.slice(cursorPosition);
     lastChar = inputURL.value.slice(-1);
     inputURL.focus();
   }
 
   document.addEventListener('keyup', () => {
     lastChar = ''
-    if(inputURL.value[0] === '*' || inputURL.value[0] === '＊') { 
+    if(inputURL.value.slice(0, 1).match(/[\*|\＊]/g)) { 
       error(inputURL); 
       inputURL.value = '';
     }
