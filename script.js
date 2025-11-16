@@ -46,6 +46,7 @@ import {console_color,console_red,console_green,console_yellow,
 
   window.addEventListener('load', () => {
     if(innerWidth > 414) { inputURL.focus() }
+    swapText.textContent = 'SWAP TO TYPING TEXT';
   });
 
   themeLists.forEach(list => {
