@@ -25,8 +25,13 @@ import {console_color,console_red,console_green,console_yellow,
   let color = themeLists[0].dataset.theme; 
   let protocol = 'https://';
   let lastChar, cursorPosition;
-  swapText.style.opacity = 1; //*
-  
+
+  function init() {
+    swapText.style.fontFamily = 'Poppins';
+    swapText.style.opacity = 1;
+    swapText.textContent = 'SWAP TO TYPING TEXT';
+  } init();
+
   const swapHowl = new Howl({src: ['mp3/swap.mp3'], volume: 0.03});
   const selectColorHowl = new Howl({src: ['mp3/selectColor.mp3'], volume: 0.05});
   const sendDataHowl = new Howl({src: ['mp3/sendData.mp3'], volume: 0.05});
