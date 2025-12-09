@@ -402,8 +402,8 @@ function createScanner() {
       // console.log('idx '+ idx); //* log
       const word = document.createElement('div');
       word.classList.add(`word${i+1}`,'word');
-      word.innerHTML = sentence.slice(prev,idx).replace(/\*/g,`$&`);
-      if(i === asteriskLength) { word.innerHTML += `${lastChar}`}
+      word.textContent = sentence.slice(prev,idx).replace(/\*/g,`$&`);
+      if(i === asteriskLength) { word.textContent += `${lastChar}`}
       prev = idx+1; 
       // console.log('prev '+ prev); //* log
       if(isFullWidth(word.textContent)) { word.classList.add('zenkakuText')}
