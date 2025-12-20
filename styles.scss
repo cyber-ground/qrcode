@@ -73,6 +73,11 @@ body {
   background-color: #fff;
   border-radius: 10px;
   border: 2px solid #333;
+  @media(hover: none) and (pointer: coarse) {
+    &:not(.createdQr) {
+      margin-top: 20px;
+    }
+  }
   &.inactive { 
     display: none;
   }
@@ -114,6 +119,9 @@ body {
         padding: 8px 0 5px;
         &.active { 
           color: #5100ff;
+        }
+        &.desktop {
+          font-size: 1.5em;
         }
       }
     }
@@ -460,6 +468,7 @@ body {
         text-align: center;
         word-wrap: break-word;
         word-break: break-word;
+          user-select: all; //***
         &.zenkakuText {
           font-family: '07LogoTypeGothic7';
           font-size: 1em;
@@ -493,6 +502,7 @@ body {
 .camera {
   position: absolute;
   top: 15.4%;
+  top: 16%;
   width: 50px;
   height: 50px;
   background-color: #dfdfdf;
@@ -500,7 +510,7 @@ body {
   border-radius: 6px;
   z-index: 100;
   &.dvh {
-    top: 21.4%;
+    top: 20.4%;
   }
   &.inactive {
     display: none;

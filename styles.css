@@ -65,6 +65,11 @@ body.success {
   border-radius: 10px;
   border: 2px solid #333;
 }
+@media (hover: none) and (pointer: coarse) {
+  .container:not(.createdQr) {
+    margin-top: 20px;
+  }
+}
 .container.inactive {
   display: none;
 }
@@ -109,6 +114,9 @@ body.success {
 }
 .container .wrapper .iconSwap-wrapper p.swapText.active {
   color: #5100ff;
+}
+.container .wrapper .iconSwap-wrapper p.swapText.desktop {
+  font-size: 1.5em;
 }
 .container .wrapper ul {
   display: flex;
@@ -444,6 +452,7 @@ body.success {
   text-align: center;
   word-wrap: break-word;
   word-break: break-word;
+  user-select: all;
 }
 .scannerContainer #result p.word-wrapper .word.zenkakuText {
   font-family: "07LogoTypeGothic7";
@@ -474,6 +483,7 @@ body.success {
 .camera {
   position: absolute;
   top: 15.4%;
+  top: 16%;
   width: 50px;
   height: 50px;
   background-color: #dfdfdf;
@@ -482,7 +492,7 @@ body.success {
   z-index: 100;
 }
 .camera.dvh {
-  top: 21.4%;
+  top: 20.4%;
 }
 .camera.inactive {
   display: none;

@@ -140,6 +140,7 @@ import {console_color,console_red,console_green,console_yellow,
     qrImage.src = previewSrc;
     imageWrapper.appendChild(qrImage);
     inputURL.blur();
+    container.classList.add('createdQr');
     btnLineBreak.classList.add('inactive');
     btnClearText.classList.remove('active');
     const downloadAnchor = document.createElement('a');
@@ -170,6 +171,7 @@ import {console_color,console_red,console_green,console_yellow,
     btnLineBreak.classList.remove('inactive');
     btnSubmit.textContent = 'Generate QR Code';
     btnClearText.classList.add('active');
+    container.classList.remove('createdQr');
   });
 
   inputURL.addEventListener('blur', () => {
